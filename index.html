@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Background Music (Optional) -->
+  <!-- <audio id="bg-music" src="music.mp3" loop></audio> -->
+
+  <div class="main-container">
+    
+    <!-- Step 1: Envelope Screen -->
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="pocket"></div>
+        <div class="letter">
+          <p class="letter-preview">Happy Birthday!</p>
+        </div>
+        <div class="seal" id="seal-btn">
+          <span>TAP TO OPEN</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Main Birthday Card Screen (Initially Hidden) -->
+    <div class="card-container hidden" id="card-container">
+      
+      <header class="card-header">
+        <p class="sub-title">A Special Wish For You</p>
+        <h1 class="main-title">Happy Birthday! ✨</h1>
+        <p class="personalized-note">May your day be filled with love, magic, and endless smiles.</p>
+      </header>
+
+      <!-- Scratch Card Section -->
+      <section class="scratch-section">
+        <h3>Scratch to Reveal a Surprise 🎁</h3>
+        <div class="canvas-wrapper">
+          <div class="secret-message">
+            <h4>You are truly special! ❤️</h4>
+            <p>Wishing you a year full of happiness and success.</p>
+          </div>
+          <canvas id="scratch-canvas" width="300" height="150"></canvas>
+        </div>
+      </section>
+
+      <!-- Countdown / Memory Note Section -->
+      <section class="wishes-section">
+        <div class="wish-box">
+          <p class="quote">"Another year older, another year wiser, and a lifetime of happiness ahead."</p>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
