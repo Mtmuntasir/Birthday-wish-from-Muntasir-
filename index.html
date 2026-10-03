@@ -4,13 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f7f3ed;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #3e322a;
+      overflow-x: hidden;
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    /* --- Envelope Styling --- */
+    .envelope-wrapper {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      width: 290px;
+      height: 195px;
+      background-color: #e2d1c3;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 145px solid transparent;
+      border-right: 145px solid transparent;
+      border-top: 115px solid #d4c2b3;
+      transform-origin: top;
+      transition: transform 0.6s ease 0.2s, z-index 0.2s ease;
+      z-index: 3;
+    }
+
+    .pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 145px solid #ebdcd0;
+      border-right: 145px solid #ebdcd0;
+      border-bottom: 105px solid #dfcfc2;
+      border-radius: 0 0 8px 8px;
+      z-index: 2;
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 260px;
+      height: 165px;
+      background: #ffffff;
+      border-radius: 5px;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.6s ease 0.5s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .letter-preview {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: #8c6d58;
+    }
+
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -20%);
+      width: 75px;
+      height: 75px;
+      background: linear-gradient(135deg, #d4af37, #aa7c11, #f3e5ab, #b8860b);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      box-shadow: 0 6px 15px rgba(184, 134, 11, 0.35);
+      z-index: 4;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      z-index: 0;
+    }
+
+    .envelope.open .letter {
+      transform: translateY(-80px);
+    }
+
+    /* --- Card Container Styling (Zaytoon Style) --- */
+    .hidden {
+      display: none !important;
+    }
+
+    .card-container {
+      width: 100%;
+      background: #fffdf9;
+      padding: 12px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(74, 53, 34, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+      border: 1px solid #f0e2d3;
+    }
+
+    .gold-border-inner {
+      border: 1px solid #e2cb98;
+      border-radius: 12px;
+      padding: 25px 15px;
+      background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header .sub-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #9c826b;
+      margin-bottom: 8px;
+    }
+
+    .card-header .main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #8a6421 0%, #b8860b 50%, #684910 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .personalized-note {
+      font-size: 0.88rem;
+      color: #6b5d52;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* --- Perfect Scratch Canvas Section --- */
+    .scratch-section h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+      color: #8c725c;
+      letter-spacing: 0.5px;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 160px;
+      margin: 0 auto 25px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border: 1px solid #eadaa2;
+    }
+
+    .secret-message {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fdfbf7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      border: 1px dashed #d8be8e;
+      border-radius: 12px;
+    }
+
+    .secret-message h4 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.1rem;
+      color: #aa7c11;
+      margin-bottom: 6px;
+    }
+
+    .secret-message p {
+      font-size: 0.82rem;
+      color: #6a5a4d;
+      line-height: 1.4;
+    }
+
+    #scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* --- Wish Box --- */
+    .wish-box {
+      background: rgba(247, 243, 237, 0.6);
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #ebdccb;
+    }
+
+    .wish-box .quote {
+      font-style: italic;
+      font-size: 0.83rem;
+      color: #726255;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Background Music (Optional) -->
-  <!-- <audio id="bg-music" src="music.mp3" loop></audio> -->
 
   <div class="main-container">
     
@@ -28,38 +275,141 @@
       </div>
     </div>
 
-    <!-- Step 2: Main Birthday Card Screen (Initially Hidden) -->
+    <!-- Step 2: Premium Birthday Card Screen -->
     <div class="card-container hidden" id="card-container">
       
-      <header class="card-header">
-        <p class="sub-title">A Special Wish For You</p>
-        <h1 class="main-title">Happy Birthday! ✨</h1>
-        <p class="personalized-note">May your day be filled with love, magic, and endless smiles.</p>
-      </header>
+      <div class="gold-border-inner">
+        <header class="card-header">
+          <p class="sub-title">A Special Wish For You</p>
+          <h1 class="main-title">Happy Birthday ✨</h1>
+          <p class="personalized-note">May your day be filled with endless love, magic, and joy.</p>
+        </header>
 
-      <!-- Scratch Card Section -->
-      <section class="scratch-section">
-        <h3>Scratch to Reveal a Surprise 🎁</h3>
-        <div class="canvas-wrapper">
-          <div class="secret-message">
-            <h4>You are truly special! ❤️</h4>
-            <p>Wishing you a year full of happiness and success.</p>
+        <!-- Premium Scratch Card Section -->
+        <section class="scratch-section">
+          <h3>Scratch to Reveal a Secret Message 🎁</h3>
+          <div class="canvas-wrapper" id="canvas-wrapper">
+            <div class="secret-message">
+              <h4>You mean the world to me! ❤️</h4>
+              <p>Wishing you a year full of unmatched happiness, peace, and beautiful moments.</p>
+            </div>
+            <canvas id="scratch-canvas"></canvas>
           </div>
-          <canvas id="scratch-canvas" width="300" height="150"></canvas>
-        </div>
-      </section>
+        </section>
 
-      <!-- Countdown / Memory Note Section -->
-      <section class="wishes-section">
-        <div class="wish-box">
-          <p class="quote">"Another year older, another year wiser, and a lifetime of happiness ahead."</p>
-        </div>
-      </section>
+        <!-- Quote Section -->
+        <section class="wishes-section">
+          <div class="wish-box">
+            <p class="quote">"Another year older, another year wiser, and a lifetime of happiness ahead."</p>
+          </div>
+        </section>
+      </div>
 
     </div>
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const envelope = document.getElementById("envelope");
+      const sealBtn = document.getElementById("seal-btn");
+      const envelopeWrapper = document.getElementById("envelope-wrapper");
+      const cardContainer = document.getElementById("card-container");
+
+      // --- 1. Envelope Open Animation ---
+      sealBtn.addEventListener("click", () => {
+        envelope.classList.add("open");
+
+        setTimeout(() => {
+          envelopeWrapper.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          envelopeWrapper.style.opacity = "0";
+          envelopeWrapper.style.transform = "scale(0.85)";
+          
+          setTimeout(() => {
+            envelopeWrapper.classList.add("hidden");
+            cardContainer.classList.remove("hidden");
+            initScratchCard(); // Render gold scratch layer
+          }, 600);
+        }, 1200);
+      });
+
+      // --- 2. Metallic Gold Scratch Card Logic ---
+      function initScratchCard() {
+        const canvas = document.getElementById("scratch-canvas");
+        const wrapper = document.getElementById("canvas-wrapper");
+        const ctx = canvas.getContext("2d");
+
+        // Dynamic resolution setup to fix offset and pixelation
+        const rect = wrapper.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        // Create Premium Metallic Gold Gradient Surface
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, "#d4af37");
+        grad.addColorStop(0.3, "#fff3a8");
+        grad.addColorStop(0.5, "#aa7c11");
+        grad.addColorStop(0.8, "#f3e5ab");
+        grad.addColorStop(1, "#8a6421");
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Subtle Gold Foil Pattern Lines
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.lineWidth = 2;
+        for (let i = -canvas.height; i < canvas.width; i += 15) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i + canvas.height, canvas.height);
+          ctx.stroke();
+        }
+
+        // Gold Card Text Overlay
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+        ctx.shadowBlur = 4;
+        ctx.font = "600 14px Montserrat";
+        ctx.textAlign = "center";
+        ctx.fillText("✨ SCRATCH HERE ✨", canvas.width / 2, canvas.height / 2 + 5);
+
+        ctx.shadowBlur = 0;
+
+        let isDrawing = false;
+
+        function getPos(e) {
+          const cRect = canvas.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          return {
+            x: clientX - cRect.left,
+            y: clientY - cRect.top
+          };
+        }
+
+        function scratch(e) {
+          if (!isDrawing) return;
+          e.preventDefault();
+
+          const pos = getPos(e);
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Mouse Events
+        canvas.addEventListener("mousedown", (e) => { isDrawing = true; scratch(e); });
+        canvas.addEventListener("mousemove", scratch);
+        canvas.addEventListener("mouseup", () => { isDrawing = false; });
+        canvas.addEventListener("mouseleave", () => { isDrawing = false; });
+
+        // Touch Events
+        canvas.addEventListener("touchstart", (e) => { isDrawing = true; scratch(e); });
+        canvas.addEventListener("touchmove", scratch);
+        canvas.addEventListener("touchend", () => { isDrawing = false; });
+      }
+    });
+  </script>
 </body>
 </html>
